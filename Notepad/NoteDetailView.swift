@@ -6,12 +6,12 @@ struct NoteDetailView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            // Title Section: Black background with white text
+            // Title Section: Dynamic background and text colors
             TextField("Enter title", text: $note.title)
                 .font(.title)
                 .padding()
-                .background(Color.black) // Black background
-                .foregroundColor(.white) // White text color
+                .foregroundColor(.primary) // Uses dynamic text color based on mode
+                .background(Color(UIColor.systemBackground)) // Dynamic background for light/dark mode
                 .cornerRadius(12)
                 .shadow(color: Color.black.opacity(0.2), radius: 5) // Optional shadow for depth
                 .focused($isTitleFocused)
@@ -22,11 +22,11 @@ struct NoteDetailView: View {
                 .background(Color.gray.opacity(0.3)) // Divider for separation
                 .padding(.horizontal)
             
-            // Body Section: Black background with white text for TextEditor
+            // Body Section: Dynamic background and text colors for TextEditor
             TextEditor(text: $note.body)
                 .padding()
-                .background(Color.black) // Black background
-                .foregroundColor(.white) // White text color
+                .background(Color(UIColor.systemBackground)) // Dynamic background for light/dark mode
+                .foregroundColor(.primary) // Dynamic text color
                 .cornerRadius(12)
                 .frame(maxHeight: .infinity)
                 .padding(.horizontal)
