@@ -27,3 +27,5 @@ struct TrashCan: View {
         }
     }
 }
+
+

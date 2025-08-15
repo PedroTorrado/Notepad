@@ -25,11 +25,20 @@ struct ContentView: View {
                                     Label("Trash", systemImage: "trash")
                                 }
                             }else{
+                                Button(role: .destructive) {
+                                    removeCompletely(note)
+                                } label: {
+                                    Label("remove", systemImage: "trash.fill")
+                                }
+                            }
+                        }
+                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                            if isShowingTrash {
                                 Button(role: .cancel) {
                                     removeFromTrashed(note)
                                 } label: {
-                                    Label("restore", systemImage: "chevron.backward").tint(.green)
-                                }
+                                    Label("Restore", systemImage: "chevron.backward")
+                                }.tint(.green)
                             }
                         }
                 }
@@ -43,13 +52,13 @@ struct ContentView: View {
                         if !isShowingTrash {
                             Button(action: addNewNote) {
                                 Image(systemName: "plus.circle.fill")
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 15))
                             }
                         }
                         // Trash toggle button
                         Button(action: toggleTrashView) {
-                            Image(systemName: isShowingTrash ? "arrowshape.left.fill" : "line.3.horizontal.decrease")
-                                .font(.system(size: 20))
+                            Image(systemName: isShowingTrash ? "arrow.backward" : "line.3.horizontal.decrease")
+                                .font(.system(size: 15))
                         }
                     }
                 }
@@ -89,6 +98,11 @@ struct ContentView: View {
         if let index = notes.firstIndex(where: { $0.id == note.id }) {
             notes[index].state = false
         }
+    }
+    
+    private func removeCompletely(_ note: Note){
+        if let index = notes.firstIndex(where: { $0.id == note.id }) {
+            notes.removeAll { $0.id == note.id }        }
     }
 
     // MARK: - File Persistence
