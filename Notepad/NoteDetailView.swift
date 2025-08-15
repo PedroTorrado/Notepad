@@ -5,21 +5,19 @@ struct NoteDetailView: View {
     @FocusState private var isTitleFocused: Bool
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 0) {
             // Title Section: Dynamic background and text colors
             TextField("Enter title", text: $note.title)
                 .font(.title)
                 .padding()
                 .foregroundColor(.primary) // Uses dynamic text color based on mode
                 .background(Color(UIColor.systemBackground)) // Dynamic background for light/dark mode
-                .cornerRadius(12)
-                .shadow(color: Color.black.opacity(0.2), radius: 5) // Optional shadow for depth
                 .focused($isTitleFocused)
                 .padding(.horizontal)
                 .onAppear { isTitleFocused = true }
             
             Divider()
-                .background(Color.gray.opacity(0.3)) // Divider for separation
+                .background(Color.gray.opacity(1)) // Divider for separation
                 .padding(.horizontal)
             
             // Body Section: Dynamic background and text colors for TextEditor
@@ -27,7 +25,6 @@ struct NoteDetailView: View {
                 .padding()
                 .background(Color(UIColor.systemBackground)) // Dynamic background for light/dark mode
                 .foregroundColor(.primary) // Dynamic text color
-                .cornerRadius(12)
                 .frame(maxHeight: .infinity)
                 .padding(.horizontal)
             
@@ -40,5 +37,5 @@ struct NoteDetailView: View {
 }
 
 #Preview {
-    NoteDetailView(note: .constant(Note(title: "Sample Note", body: "This is the note content.")))
+    NoteDetailView(note: .constant(Note(title: "Sample Note", body: "This is the note content.", state: true)))
 }
